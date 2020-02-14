@@ -8,7 +8,7 @@ I have an Automation that runs weekly to get this information and then emails it
 
 Prerequisites
 -------------
-Requires a list of domains (with counts) in order to come up with the top 10.  I have another repository that describes how to get that data.
+Requires a list of domains (with counts) in order to come up with the top 10 in a Data Extension named "domain_counts".  I have another repository that describes how to get that data.  (Or you can fake it if you know the domains you want to track.)
 
 How it Works
 ------------
