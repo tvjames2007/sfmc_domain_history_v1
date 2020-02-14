@@ -1,0 +1,45 @@
+TARGET [domain_history_v1] - update
+
+SELECT
+
+    strDomain,
+    'bounce' as strAction
+    
+FROM
+    
+    [domain_history_v1]
+    
+UNION
+
+SELECT
+
+    strDomain,
+    'open' as strAction
+
+FROM
+    
+    [domain_history_v1]
+    
+UNION
+
+SELECT
+
+    strDomain,
+    'click' as strAction
+    
+FROM
+    
+    [domain_history_v1]
+
+UNION
+
+SELECT
+
+    strDomain,
+    'unsubscribe' as strAction
+
+FROM
+    
+    [domain_history_v1]
+
+        
