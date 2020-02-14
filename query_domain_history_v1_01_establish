@@ -1,0 +1,14 @@
+TARGET [domain_history_v1] - update
+
+SELECT TOP 10 
+
+    dc.strDomain,
+    'volume' as strAction
+
+FROM
+
+    [domain_count] dc
+
+ORDER BY
+
+    dc.cntDomain DESC
