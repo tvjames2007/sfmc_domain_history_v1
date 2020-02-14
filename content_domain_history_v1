@@ -41,7 +41,7 @@ set @d5 = dateadd(@d4,'-7','d')
 ]%%
     <tr><td colspan="7" bgcolor="#FFFFBB"><b><span style="font-size:18px;">%%=v(@strDomain)=%%</span></b></td></tr>
     
-        <tr bgcolor="#EEEEEE"><td><center><b>Date</font></b></center></td><td width="14%"><center><b>Volume</b></center></td><td width="14%"><center><b>Bounce Rate</b></center></td><td width="14%"><center><b>Open Rate</b></center></td><td width="14%"><center><b>Click Rate</b></center></td><td width="14%"><center><b>Click-to-Open Rate</b></center></td><td width="14%"><center><b>Opt-Out Rate</b></center></td></tr><
+        <tr bgcolor="#EEEEEE"><td><center><b>Date</font></b></center></td><td width="14%"><center><b>Volume</b></center></td><td width="14%"><center><b>Delivery Rate</b></center></td><td width="14%"><center><b>Open Rate</b></center></td><td width="14%"><center><b>Click Rate</b></center></td><td width="14%"><center><b>Click-to-Open Rate</b></center></td><td width="14%"><center><b>Opt-Out Rate</b></center></td></tr><
 
   %%[
 
