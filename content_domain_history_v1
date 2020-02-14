@@ -1,0 +1,163 @@
+%%[
+set @ver = "2020.02.14.jl - Cleaned up"
+]%%<html>
+  
+<head>
+  <style type="text/css">
+    body, p, a, table { font-family: verdana, arial; font-size: 12px; color:#555555; }
+    h1 { color:#555577; } 
+    
+    table, th, td {
+    border: 1px solid #CCCCCC;
+    border-collapse: collapse;
+      padding: 10px;
+}
+  </style>
+</head>
+<body>
+<span style="font-size:48px;">Domain Performance Weekly</span><br>
+<span style="font-size:24px;">Good morning, here's how our top domains are doing for %%=DatePart(now(),'M')=%%/%%=DatePart(now(),'D')=%%</span>
+<hr noshade size="1">
+  
+  <table width="100%" border="1" cellpadding="5" cellspacing="0" bordercolor="#EEEEEE">
+
+%%[
+
+
+set @rows = LookupOrderedRows("domain_count",10,"cntDomain DESC","query","1")
+for @loop4 = 1 to RowCount(@rows) do
+set @row = Row(@rows,@loop4)
+
+set @strDomain = Field(@row,"strDomain")
+
+set @d0 = now()
+set @d1 = dateadd(@d0,'-7','d')    
+set @d2 = dateadd(@d1,'-7','d')    
+set @d3 = dateadd(@d2,'-7','d')    
+set @d4 = dateadd(@d3,'-7','d')    
+set @d5 = dateadd(@d4,'-7','d')    
+
+
+]%%
+    <tr><td colspan="7" bgcolor="#FFFFBB"><b><span style="font-size:18px;">%%=v(@strDomain)=%%</span></b></td></tr>
+    
+        <tr bgcolor="#EEEEEE"><td><center><b>Date</font></b></center></td><td width="14%"><center><b>Volume</b></center></td><td width="14%"><center><b>Bounce Rate</b></center></td><td width="14%"><center><b>Open Rate</b></center></td><td width="14%"><center><b>Click Rate</b></center></td><td width="14%"><center><b>Click-to-Open Rate</b></center></td><td width="14%"><center><b>Opt-Out Rate</b></center></td></tr><
+
+  %%[
+
+
+
+set @rows2 = LookupRows("domain_history_v1","strAction","volume","strDomain",@strDomain)
+set @row = Row(@rows2,1)
+
+set @v0 = field(@row,"num0")
+set @v1 = field(@row,"num1")
+set @v2 = field(@row,"num2")
+set @v3 = field(@row,"num3")
+set @v4 = field(@row,"num4")
+set @v5 = field(@row,"num5")
+
+set @rows2 = LookupRows("domain_history_v1","strAction","bounce","strDomain",@strDomain)
+set @row = Row(@rows2,1)
+
+set @b0 = divide(subtract(@v0,field(@row,"num0")),@v0)
+set @b1 = divide(subtract(@v1,field(@row,"num1")),@v1)
+set @b2 = divide(subtract(@v2,field(@row,"num2")),@v2)
+set @b3 = divide(subtract(@v3,field(@row,"num3")),@v3)
+set @b4 = divide(subtract(@v4,field(@row,"num4")),@v4)
+set @b5 = divide(subtract(@v5,field(@row,"num5")),@v5)
+
+set @rows2 = LookupRows("domain_history_v1","strAction","open","strDomain",@strDomain)
+set @row = Row(@rows2,1)
+
+set @o0 = field(@row,"num0")
+set @o1 = field(@row,"num1")
+set @o2 = field(@row,"num2")
+set @o3 = field(@row,"num3")
+set @o4 = field(@row,"num4")
+set @o5 = field(@row,"num5")
+
+set @or0 = divide(@o0,@v0)
+set @or1 = divide(@o1,@v1)
+set @or2 = divide(@o2,@v2)
+set @or3 = divide(@o3,@v3)
+set @or4 = divide(@o4,@v4)
+set @or5 = divide(@o5,@v5)
+
+set @rows2 = LookupRows("domain_history_v1","strAction","click","strDomain",@strDomain)
+set @row = Row(@rows2,1)
+
+set @c0 = field(@row,"num0")
+set @c1 = field(@row,"num1")
+set @c2 = field(@row,"num2")
+set @c3 = field(@row,"num3")
+set @c4 = field(@row,"num4")
+set @c5 = field(@row,"num5")
+
+set @ct0 = divide(@c0,@o0)
+set @ct1 = divide(@c1,@o1)
+set @ct2 = divide(@c2,@o2)
+set @ct3 = divide(@c3,@o3)
+set @ct4 = divide(@c4,@o4)
+set @ct5 = divide(@c5,@o5)
+
+set @c0 = divide(@c0,@v0)
+set @c1 = divide(@c1,@v1)
+set @c2 = divide(@c2,@v2)
+set @c3 = divide(@c3,@v3)
+set @c4 = divide(@c4,@v4)
+set @c5 = divide(@c5,@v5)
+
+
+set @rows2 = LookupRows("domain_history_v1","strAction","unsubscribe","strDomain",@strDomain)
+set @row = Row(@rows2,1)
+
+set @u0 = divide(field(@row,"num0"),@v0)
+set @u1 = divide(field(@row,"num1"),@v1)
+set @u2 = divide(field(@row,"num2"),@v2)
+set @u3 = divide(field(@row,"num3"),@v3)
+set @u4 = divide(field(@row,"num4"),@v4)
+set @u5 = divide(field(@row,"num5"),@v5)
+
+
+
+
+set @row0 = concat("<tr><td><center>",format(@d0,"MM/dd"),"</center></td><td align=""right"">",format(@v0,"n0"),"</td><td align=""right"">",format(@b0,"p2"),"</td><td align=""right"">",format(@or0,"p2"),"</td><td align=""right"">",format(@c0,"p2"),"</td><td align=""right"">",format(@ct0,"p2"),"</td><td align=""right"">",format(@u0,"p2"),"</td></tr>")
+set @row1 = concat("<tr><td><center>",format(@d1,"MM/dd"),"</center></td><td align=""right"">",format(@v1,"n0"),"</td><td align=""right"">",format(@b1,"p2"),"</td><td align=""right"">",format(@or1,"p2"),"</td><td align=""right"">",format(@c1,"p2"),"</td><td align=""right"">",format(@ct1,"p2"),"</td><td align=""right"">",format(@u1,"p2"),"</td></tr>")
+set @row2 = concat("<tr><td><center>",format(@d2,"MM/dd"),"</center></td><td align=""right"">",format(@v2,"n0"),"</td><td align=""right"">",format(@b2,"p2"),"</td><td align=""right"">",format(@or2,"p2"),"</td><td align=""right"">",format(@c2,"p2"),"</td><td align=""right"">",format(@ct2,"p2"),"</td><td align=""right"">",format(@u2,"p2"),"</td></tr>")
+set @row3 = concat("<tr><td><center>",format(@d3,"MM/dd"),"</center></td><td align=""right"">",format(@v3,"n0"),"</td><td align=""right"">",format(@b3,"p2"),"</td><td align=""right"">",format(@or3,"p2"),"</td><td align=""right"">",format(@c3,"p2"),"</td><td align=""right"">",format(@ct3,"p2"),"</td><td align=""right"">",format(@u3,"p2"),"</td></tr>")
+set @row4 = concat("<tr><td><center>",format(@d4,"MM/dd"),"</center></td><td align=""right"">",format(@v4,"n0"),"</td><td align=""right"">",format(@b4,"p2"),"</td><td align=""right"">",format(@or4,"p2"),"</td><td align=""right"">",format(@c4,"p2"),"</td><td align=""right"">",format(@ct4,"p2"),"</td><td align=""right"">",format(@u4,"p2"),"</td></tr>")
+set @row5 = concat("<tr><td><center>",format(@d5,"MM/dd"),"</center></td><td align=""right"">",format(@v5,"n0"),"</td><td align=""right"">",format(@b5,"p2"),"</td><td align=""right"">",format(@or5,"p2"),"</td><td align=""right"">",format(@c5,"p2"),"</td><td align=""right"">",format(@ct5,"p2"),"</td><td align=""right"">",format(@u5,"p2"),"</td></tr>")
+
+
+]%%
+   
+%%=v(@row0)=%%    
+%%=v(@row1)=%%    
+%%=v(@row2)=%%    
+%%=v(@row3)=%%    
+%%=v(@row4)=%%    
+%%=v(@row5)=%%    
+
+     %%[
+]%%
+    
+    
+    %%[
+  next @loop4
+]%%
+
+  </table>
+
+  
+  <!-- <custom name="opencounter" type="tracking"/> --><!-- 
+
+<a href="%%profile_center_url%%" alias="Update Profile">Update Profile</a><a href="%%unsub_center_url%%" alias="Unsubscribe">Unsubscribe</a><table cellpadding="2" cellspacing="0" width="600" ID="Table5" Border=0><tr><td><font face="verdana" size="1" color="#444444">This email was sent by: <b>%%Member_Busname%%</b><br>%%Member_Addr%% %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br><br></font></td></tr></table>
+
+-->
+  <hr noshade size="1">
+  <span style="font-size: 10px;">
+    <b>Methodology:</b> Uses standard SFMC measures for sent, bounce, opens and opt-outs.  For clicks, any click to the email unsubscribe page are not counted.<br />
+    <b>Version: %%=v(@ver)=%%</b> / </span><a href="%%view_email_url%%"><span style="font-size: 10px;">View in Browser</span></a>
+</body>
+</html>
