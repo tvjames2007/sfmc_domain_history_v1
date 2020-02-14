@@ -19,3 +19,7 @@ Query 3 - Moves everything down 1 "slot"
 Query 4-8 - Gets new data, stores in slot 0.  Change "14" to however many days you want in your historical look-back.
 
 It currently thinks it's being run weekly based on the dates calculated within the content.
+
+History
+-------
+I built this for a work project, but it's just standard SFMC, so uploading it here (on my own time) in case others can benefit from it.
