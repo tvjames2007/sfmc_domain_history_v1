@@ -1,0 +1,28 @@
+TARGET [domain_history_v1] - update
+
+SELECT
+
+    s.domain as strDomain,
+    'open' as strAction,
+    count(s.EventDate) as num0
+    
+FROM
+
+    _open s
+    
+INNER JOIN
+
+    [domain_history_v1] d on s.domain = d.strDomain
+    
+WHERE
+
+    DATEDIFF(day,EventDate,GETDATE()) < 15
+    AND
+    IsUnique = 1
+    AND
+    d.strAction='volume'
+
+    
+GROUP BY
+
+    s.domain
