@@ -1,0 +1,16 @@
+TARGET [domain_history_v1] - update
+
+SELECT
+
+    strDomain,
+    strAction,
+    num4 as num5,
+    num3 as num4,
+    num2 as num3,
+    num1 as num2,
+    num0 as num1,
+    '-1' as num0
+
+FROM
+
+    [domain_history_v1]
