@@ -13,10 +13,10 @@ Requires a list of domains (with counts) in order to come up with the top 10 in 
 How it Works
 ------------
 Data Extension - holds the data.  Nothing special.  6 "slots" for holding 6 historical time periods.
-Query 1 - Gets any new top 10 domains.  (Note: Does not remove domains no longer in the top 10)
-Query 2 - Adds supplemental data points for any new top 10 domains.
-Query 3 - Moves everything down 1 "slot"
-Query 4-8 - Gets new data, stores in slot 0.  Change "14" to however many days you want in your historical look-back.
+* Query 1 - Gets any new top 10 domains.  (Note: Does not remove domains no longer in the top 10)
+* Query 2 - Adds supplemental data points for any new top 10 domains.
+* Query 3 - Moves everything down 1 "slot"
+* Query 4-8 - Gets new data, stores in slot 0.  Change "14" to however many days you want in your historical look-back.
 
 It currently thinks it's being run weekly based on the dates calculated within the content.
 
